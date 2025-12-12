@@ -1,6 +1,8 @@
 import os
 
-DATABASE_URL = os.getenv(
-    "DATABASE_URL",
-    "postgresql://postgres:14082006@localhost:5432/customer_registry_db"
-)
+DATABASE_URL = os.getenv("DATABASE_URL")
+
+if not DATABASE_URL:
+    raise RuntimeError(
+        "DATABASE_URL no está configurada. Establécela como variable de entorno."
+    )
