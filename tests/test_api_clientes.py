@@ -4,8 +4,10 @@ from app.domain.cliente import Cliente
 
 client = TestClient(app)
 
-
 def test_post_crear_cliente_ok():
+    """
+    Test para verificar que la API crea un cliente correctamente.
+    """
     payload = {
         "first_name": "Test",
         "last_name": "User",
@@ -22,8 +24,10 @@ def test_post_crear_cliente_ok():
     assert json["first_name"] == "Test"
     assert json["email"] == "unique_123@test.com"
 
-
 def test_post_email_duplicado():
+    """
+    Test para verificar que la API lanza un error si el correo ya existe.
+    """
     payload = {
         "first_name": "Test",
         "last_name": "User",

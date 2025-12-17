@@ -3,8 +3,10 @@ from app.application.create_customer_use_case import CrearClienteUseCase
 from app.domain.cliente import Cliente
 from app.domain.cliente_repository import ClienteRepositoryInterface
 
-
 class FakeRepository(ClienteRepositoryInterface):
+    """
+    Repositorio falso para hacer pruebas unitarias sin acceder a una base de datos real.
+    """
     def __init__(self):
         self.customers = []
 
@@ -16,12 +18,14 @@ class FakeRepository(ClienteRepositoryInterface):
         self.customers.append(cliente)
         return cliente
 
-
 def test_should_fail_if_email_exists():
+    """
+    Test para verificar que se lanza un error si el correo electrónico ya existe.
+    """
     repo = FakeRepository()
     use_case = CrearClienteUseCase(repo)
 
-    # Cliente ya existe
+    # Agrega un cliente para que exista el correo
     repo.customers.append(Cliente(
         id=1,
         first_name="Ana",
@@ -38,8 +42,10 @@ def test_should_fail_if_email_exists():
             "phone": "123"
         })
 
-
 def test_should_create_customer_successfully():
+    """
+    Test para verificar que se crea un cliente correctamente.
+    """
     repo = FakeRepository()
     use_case = CrearClienteUseCase(repo)
 

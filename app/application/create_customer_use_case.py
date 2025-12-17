@@ -11,12 +11,12 @@ class CrearClienteUseCase:
         required_fields = ["first_name", "last_name", "email"]
         for field in required_fields:
             if not data.get(field):
-                raise ValueError(f"Missing required field: {field}")
+                raise ValueError("Debe ingresar todos los campos obligatorios")
 
         email = data["email"]
 
         if self.repo.exists_email(email):
-            raise ValueError("The email already exists")
+            raise ValueError("El correo electrónico ya existe")
 
         cliente = Cliente(
             first_name=data["first_name"],
